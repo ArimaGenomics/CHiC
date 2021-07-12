@@ -78,11 +78,11 @@ help_Help="* [-h]: print this help and exit"
 
 printHelpAndExit() {
     echo -e "$usage_Help"
-	echo -e "$run_hicup_Help"
+    echo -e "$run_hicup_Help"
     echo -e "$run_bam2chicago_Help"
     echo -e "$run_chicago_Help"
     echo -e "$run_plot_Help"
-	echo -e "$bowtie2_Help"
+    echo -e "$bowtie2_Help"
     echo -e "$bowtie2_index_basename_Help"
     echo -e "$digest_Help"
     echo -e "$hicup_dir_Help"
@@ -145,8 +145,8 @@ threads=12 # number of threads to run HiCUP and CHiCAGO.
 # while getopts "A:B:C:d:D:hH:I:L:m:M:n:O:o:P:p:R:r:s:t:vW:X:Y:Z:" opt; do
 while getopts "A:B:b:C:d:D:hH:I:O:o:P:p:R:r:t:vW:X:Y:Z:" opt; do
     case $opt in
-	h) printHelpAndExit 0;;
-	v) printVersionAndExit 0;;
+    h) printHelpAndExit 0;;
+    v) printVersionAndExit 0;;
     W) run_hicup=$OPTARG ;;
     Y) run_bam2chicago=$OPTARG ;;
     Z) run_chicago=$OPTARG ;;
@@ -154,24 +154,24 @@ while getopts "A:B:b:C:d:D:hH:I:O:o:P:p:R:r:t:vW:X:Y:Z:" opt; do
     A) bowtie2=$OPTARG ;;
     X) bowtie2_index_basename=$OPTARG ;;
     d) digest=$OPTARG ;;
-	H) hicup_dir=$OPTARG ;;
-	C) chicago_dir=$OPTARG ;;
-	I) FASTQ_string=$OPTARG ;;
-	o) out_dir=$OPTARG ;;
-	p) output_prefix=$OPTARG ;;
+    H) hicup_dir=$OPTARG ;;
+    C) chicago_dir=$OPTARG ;;
+    I) FASTQ_string=$OPTARG ;;
+    o) out_dir=$OPTARG ;;
+    p) output_prefix=$OPTARG ;;
     b) BED=$OPTARG ;;
-	R) RMAP=$OPTARG ;;
+    R) RMAP=$OPTARG ;;
     B) BAITMAP=$OPTARG ;;
     D) design_dir=$OPTARG ;;
-	O) organism=$OPTARG ;;
-	# m) minFragLen=$OPTARG ;;
-	# M) maxFragLen=$OPTARG ;;
+    O) organism=$OPTARG ;;
+    # m) minFragLen=$OPTARG ;;
+    # M) maxFragLen=$OPTARG ;;
     r) resolution=$OPTARG ;;
     # s) binsize=$OPTARG ;;
-	# n) minNPerBait=$OPTARG ;;
-	# L) maxLBrownEst=$OPTARG ;;
+    # n) minNPerBait=$OPTARG ;;
+    # L) maxLBrownEst=$OPTARG ;;
     t) threads=$OPTARG ;;
-	[?]) printHelpAndExit 1;;
+    [?]) printHelpAndExit 1;;
     esac
 done
 
@@ -510,57 +510,57 @@ if [ "$run_plot" -eq 1 ]; then
     echo "Generating metaplot and heatmap images [$timestamp] ..."
 
     bam_file_sorted=$( echo $hicup_output_bam_string | sed 's/^\(.*\)_R1_2.*\.hicup\.bam$/\1_R1_2.hicup.sorted.bam/' )
-	bigwig_file=$plot_dir"/"$output_prefix".bigwig"
-	matrix_file=$plot_dir"/"$output_prefix".matrix.tab.gz"
-	#metaplot=$plot_dir"/"$output_prefix".metaplot.pdf"
-	heatmap=$plot_dir"/"$output_prefix".heatmap.pdf"
+    bigwig_file=$plot_dir"/"$output_prefix".bigwig"
+    matrix_file=$plot_dir"/"$output_prefix".matrix.tab.gz"
+    #metaplot=$plot_dir"/"$output_prefix".metaplot.pdf"
+    heatmap=$plot_dir"/"$output_prefix".heatmap.pdf"
 
-	echo "Sorting and creating index for the bam file ..."
+    echo "Sorting and creating index for the bam file ..."
     samtools sort -T $out_dir"/sorting_tempfile" -@ $threads $hicup_output_bam_string -o $bam_file_sorted 2> /dev/null
-	samtools index -@ $threads $bam_file_sorted
+    samtools index -@ $threads $bam_file_sorted
 
-	echo "Generating coverage bigwig file from sequencing reads ..."
-	bamCoverage \
-	--bam $bam_file_sorted \
-	--outFileName $bigwig_file \
-	--outFileFormat bigwig \
-	--ignoreDuplicates \
-	--numberOfProcessors max \
+    echo "Generating coverage bigwig file from sequencing reads ..."
+    bamCoverage \
+    --bam $bam_file_sorted \
+    --outFileName $bigwig_file \
+    --outFileFormat bigwig \
+    --ignoreDuplicates \
+    --numberOfProcessors max \
     2> /dev/null
 
-	# Generate a matrix file with +/- 5kb from baited regions in the baitmap
+    # Generate a matrix file with +/- 5kb from baited regions in the baitmap
     ###computeMatrix reference-point###
-	echo "Generating coverage matrix file ..."
-	computeMatrix scale-regions \
-	--scoreFileName $bigwig_file \
-	--regionsFileName $BAITMAP \
+    echo "Generating coverage matrix file ..."
+    computeMatrix scale-regions \
+    --scoreFileName $bigwig_file \
+    --regionsFileName $BAITMAP \
     --regionBodyLength 100 \
-	--beforeRegionStartLength 5000 \
-	--afterRegionStartLength 5000 \
+    --beforeRegionStartLength 5000 \
+    --afterRegionStartLength 5000 \
     --binSize 5 \
-	--outFileName $matrix_file \
-	--numberOfProcessors max
+    --outFileName $matrix_file \
+    --numberOfProcessors max
 
-	# Use plotHeatmap to plot a heatmap of the average of the matrix
-	echo "Generating heatmap image ..."
-	plotHeatmap \
-	--matrixFile $matrix_file \
-	--outFileName $heatmap \
-	--xAxisLabel "" \
-	--yAxisLabel "Coverage" \
-	--refPointLabel "Probe Regions" \
-	--regionsLabel $output_prefix \
+    # Use plotHeatmap to plot a heatmap of the average of the matrix
+    echo "Generating heatmap image ..."
+    plotHeatmap \
+    --matrixFile $matrix_file \
+    --outFileName $heatmap \
+    --xAxisLabel "" \
+    --yAxisLabel "Coverage" \
+    --refPointLabel "Probe Regions" \
+    --regionsLabel $output_prefix \
     --startLabel "" \
     --endLabel "" \
-	--samplesLabel "Signal Enrichment at Capture Regions" \
-	--colorList "white,darkblue" \
-	--heatmapHeight 12 \
-	--yMin 0
+    --samplesLabel "Signal Enrichment at Capture Regions" \
+    --colorList "white,darkblue" \
+    --heatmapHeight 12 \
+    --yMin 0
 
     #enrichment=$(zcat $matrix_file | awk -F $'\t' 'BEGIN {background = 0; peak = 0} {background = background + $7; peak = peak + ($1016+$1017)/2} END {enrichment = peak / background; printf("%.2f", enrichment)}');
 
     timestamp=`date '+%Y/%m/%d %H:%M:%S'`
-	echo "Finished making metaplot and heatmap images in $plot_dir [$timestamp]"
+    echo "Finished making metaplot and heatmap images in $plot_dir [$timestamp]"
 
     # Make 4C plots!!!
     #timestamp=`date '+%Y/%m/%d %H:%M:%S'`
@@ -577,9 +577,9 @@ timestamp=`date '+%Y/%m/%d %H:%M:%S'`
 echo "Post-processing by Arima Genomics [$timestamp] ..."
 
 if [ -f "$loop_file" ]; then
-	total_loops=`grep -v "start1" $loop_file | wc -l`
+    total_loops=`grep -v "start1" $loop_file | wc -l`
 else
-	total_loops=0
+    total_loops=0
 fi
 
 #hicup_stat_1=$out_hicup"/hicup_truncater_summary_*.txt"
