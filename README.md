@@ -120,8 +120,8 @@ export PATH=/where/to/install/bin:$PATH
 ## Usage (Command line options)
 Arima-CHiC-v1.3.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_plot]
               [-A bowtie2] [-X bowtie2_index_basename] [-d digest] [-H hicup_dir] [-C chicago_dir]
-              [-I FASTQ_string] [-o out_dir] [-p output_prefix] [-R RMAP] [-B BAITMAP] [-D design_dir]
-              [-O organism] [-r resolution] [-t threads] [-v] [-h]
+              [-I FASTQ_string] [-o out_dir] [-p output_prefix] [-b BED] [-R RMAP] [-B BAITMAP]
+              [-D design_dir] [-O organism] [-r resolution] [-t threads] [-v] [-h]
 
       * [-W run_hicup]: "1" (default) to run HiCUP pipeline, "0" to skip. If skipping,
             HiCUP_summary_report_*.txt and *R1_2*.hicup.bam need to be in the HiCUP output folder.
@@ -136,6 +136,7 @@ Arima-CHiC-v1.3.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_
       * [-I FASTQ_string]: a pair of FASTQ files separated by "," (no space is allowed)
       * [-o out_dir]: output directory
       * [-p output_prefix]: output file prefix (filename only, not including the path)
+      * [-b BED]: the Arima capture probes design BED file for CHiCAGO
       * [-R RMAP]: CHiCAGO's *.rmap file
       * [-B BAITMAP]: CHiCAGO's *.baitmap file
       * [-D design_dir]: directory containing CHiCAGO's design files
