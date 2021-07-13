@@ -1,0 +1,2 @@
+Sample_name	Raw_pairs	Mapped_pairs	%_Mapped	Duplicated_pairs	%_Duplicated_pairs	Unique_valid_pairs	%_Unique_valid_pairs	Loops	Intra_pairs	%_Intra_pairs	Intra_ge_15kb_pairs	%_Intra_ge_15kb_pairs	Inter_pairs	%_Inter_pairs	%_on-target	Enrichment
+testdataset25M	25000000	44293682	88.6	3311351	29.5	7900908	70.5	30173	6643241	84.1	4593714	58.1	1257667	15.9	91.9	2159
