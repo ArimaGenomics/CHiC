@@ -185,6 +185,13 @@ These files can be viewed in the WashU EpiGenome Browser (http://epigenomegatewa
 - PDF of metaplot of all mapped reads overlapping the probe regions used for loop calling. This file can be used to assess the signal to noise of the CHiC enrichment.
 
 
+## Test Dataset
+
+25 and 100 million Illumina paired-end sequencing datasets and their pipeline output files can be downloaded from:
+
+ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/test_data/
+
+
 ## Arima Pipeline Version
 
 1.3
