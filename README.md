@@ -10,6 +10,13 @@ This pipeline is suited for CHiC from any protocol but optimal results are obtai
 
 To order Arima-HiC<sup>+</sup> kits, please visit our website: https://arimagenomics.com/
 
+### Installing Arima CHiC
+
+```
+git clone https://github.com/ArimaGenomics/CHiC.git
+cd CHiC
+```
+
 ### Installing HiCUP
 
 Refer to the documentation at: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html for help installing HiCUP and its dependencies.
