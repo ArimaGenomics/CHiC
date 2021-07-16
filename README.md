@@ -15,11 +15,36 @@ To order Arima-HiC<sup>+</sup> kits, please visit our website: https://arimageno
 ```
 git clone https://github.com/ArimaGenomics/CHiC.git
 cd CHiC
+tar xf chicagoTools.tar.gz
+chmod 755 Arima-CHiC-v1.3.sh
+```
+
+### Installing Python 3.4 or later
+
+- Anaconda3, https://docs.anaconda.com/anaconda/install/linux/
+
+```
+curl -O https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh
+sh Anaconda3-2019.07-Linux-x86_64.sh
+# read the user agreement and answer yes. install Anaconda3 in the default location which is your home folder.
+```
+
+### Installing R 3.4.3 or later
+
+```
+conda install R
+```
+
+- argparse (2.0.1), https://cran.r-project.org/web/packages/argparse/index.html
+
+```
+# in R
+install.packages("argparse")
 ```
 
 ### Installing HiCUP
 
-Refer to the documentation at: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html for help installing HiCUP and its dependencies.
+Refer to the documentation at: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html for help installing HiCUP and its dependencies (Perl, R, bowtie2, and samtools).
 
 ```
 wget https://github.com/StevenWingett/HiCUP/archive/refs/tags/v0.8.0.tar.gz
@@ -38,45 +63,34 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
 BiocManager::install("Chicago")
 ```
 
-### Arima Specific Prerequisites
+### Other
 
-This pipeline uses all the same dependencies as HiCUP and CHiCAGO as well as:
-
-#### python 3.4 or later
-
-- Anaconda3, https://docs.anaconda.com/anaconda/install/linux/
+Before installing HTSLIB, gcc and zlib are required. Before installing bedtools, g++ is required.
+- gcc, https://gcc.gnu.org/
 
 ```
-curl -O https://repo.anaconda.com/archive/Anaconda3-2019.07-Linux-x86_64.sh
-sh Anaconda3-2019.07-Linux-x86_64.sh
-# read the user agreement and answer yes. install Anaconda3 in the default location which is your home folder.
+conda install -c conda-forge gcc_linux-64
 ```
 
-- deeptools, https://deeptools.readthedocs.io/en/develop/content/installation.html
+- g++, https://gcc.gnu.org/
 
 ```
-conda install -c bioconda deeptools
+apt install g++
 ```
 
-#### R 3.4.3 or later
+- libz, https://zlib.net/
 
 ```
-conda install R
+apt install libz-dev
 ```
 
-- argparse (2.0.1), https://cran.r-project.org/web/packages/argparse/index.html
+- bowtie2, https://github.com/BenLangmead/bowtie2
 
 ```
-# in R
-install.packages("argparse")
+apt install bowtie2
 ```
-
-#### Other
 
 - HTSLIB 1.10.2, http://www.htslib.org/download/
-- samtools 1.9, http://www.htslib.org/
-- bedtools 2.25, https://bedtools.readthedocs.io/en/latest/
-- bcftools 1.9, http://samtools.github.io/bcftools/
 
 ```
 wget https://github.com/samtools/htslib/releases/download/1.10.2/htslib-1.10.2.tar.bz2
@@ -105,6 +119,7 @@ export PATH=/where/to/install/bin:$PATH
 ```
 wget https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz
 tar -xzf bedtools-2.25.0.tar.gz
+mv bedtools2 bedtools-2.25.0
 cd bedtools-2.25.0
 ./configure --prefix=/where/to/install
 make
@@ -122,6 +137,12 @@ cd bcftools-1.10.2
 make
 make install
 export PATH=/where/to/install/bin:$PATH
+```
+
+- deeptools, https://deeptools.readthedocs.io/en/develop/content/installation.html
+
+```
+conda install -c bioconda deeptools
 ```
 
 ## Usage (Command line options)
