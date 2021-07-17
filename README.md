@@ -65,7 +65,7 @@ BiocManager::install("Chicago")
 
 ### Other
 
-Before installing HTSLIB, gcc and zlib are required. Before installing bedtools, g++ is required.
+Before installing HTSLIB, gcc and zlib are required. Before installing bedtools, g++ is required. Skip if you already have those compilers installed.
 - gcc, https://gcc.gnu.org/
 
 ```
@@ -213,9 +213,9 @@ These files can be viewed in the WashU EpiGenome Browser (http://epigenomegatewa
 - PDF of metaplot of all mapped reads overlapping the probe regions used for loop calling. This file can be used to assess the signal to noise of the CHiC enrichment.
 
 
-## Test Dataset
+## Test Dataset (hg38)
 
-25 and 100 million Illumina paired-end sequencing datasets and their pipeline output files can be downloaded from:
+25 and 100 million Illumina paired-end sequencing datasets and their pipeline output files (based on hg38) can be downloaded from:
 
 ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/test_data/
 

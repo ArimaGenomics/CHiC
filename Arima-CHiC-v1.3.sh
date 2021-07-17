@@ -15,8 +15,9 @@
 # samtools (v1.10)
 # bedtools (v2.25)
 # bcftools (v1.10)
+# deeptools
 
-# See https://github.com/arimagenomics for installation help
+# See https://github.com/ArimaGenomics/CHiC for installation help
 
 version="v1.3"
 cwd=$(dirname $0)
@@ -176,6 +177,41 @@ while getopts "A:B:b:C:d:D:hH:I:O:o:P:p:R:r:t:vW:X:Y:Z:" opt; do
 done
 
 # Sanity checks
+#hash Rscript &> /dev/null
+command -v Rscript &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find R. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
+#hash samtools &> /dev/null
+command -v samtools &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find samtools. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
+#hash bedtools &> /dev/null
+command -v bedtools &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find bedtools. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
+#hash bgzip &> /dev/null
+command -v bgzip &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find bgzip. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
+#hash tabix &> /dev/null
+command -v tabix &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find tabix. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
 if ! [[ "$run_hicup" == "0" || "$run_hicup" == "1" ]]; then
     echo "The argument \"run_hicup\" must be either 0 or 1 (-W)!"
     printHelpAndExit 1
@@ -493,7 +529,7 @@ echo -e "$loop_file\n"
 
 # Keep only those intra-chromosomal interactions that are <= 2Mb
 awk -v FS=",|\t" -v OFS="\t" 'BEGIN {print "chr1","start1","end1","chr2","start2","end2","fdr"} {if($1==$4 && ($6+$5)/2 - ($3+$2)/2 <= 2000000 && ($6+$5)/2 - ($3+$2)/2 >= -2000000) print $1,$2,$3,$4,$5,$6,$7}' $washU_text > $plot_dir"/"${output_prefix}".cis_le_2Mb.longrange"
-/opt/R/bin/Rscript $cwd"/utils/bedpe2tabix.R" -i $plot_dir"/"${output_prefix}".cis_le_2Mb.longrange" -t $plot_dir"/"${output_prefix}".cis_le_2Mb.arcplot" > /dev/null
+Rscript $cwd"/utils/bedpe2tabix.R" -i $plot_dir"/"${output_prefix}".cis_le_2Mb.longrange" -t $plot_dir"/"${output_prefix}".cis_le_2Mb.arcplot" > /dev/null
 echo "Arcplot files for WashU EpiGenome Browser (cis <= 2Mb):"
 echo "$plot_dir/${output_prefix}.cis_le_2Mb.arcplot.gz"
 echo "$plot_dir/${output_prefix}.cis_le_2Mb.arcplot.gz.tbi"
