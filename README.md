@@ -35,11 +35,11 @@ sh Anaconda3-2019.07-Linux-x86_64.sh
 conda install R
 ```
 
-- argparse (2.0.1), https://cran.r-project.org/web/packages/argparse/index.html
+- argparse (0.7.1), https://cran.r-project.org/web/packages/argparser/index.html
 
 ```
 # in R
-install.packages("argparse")
+install.packages("argparser")
 ```
 
 ### Installing HiCUP
