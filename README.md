@@ -35,7 +35,7 @@ sh Anaconda3-2019.07-Linux-x86_64.sh
 conda install R
 ```
 
-- argparse (0.7.1), https://cran.r-project.org/web/packages/argparser/index.html
+- argparser (0.7.1), https://cran.r-project.org/web/packages/argparser/index.html
 
 ```
 # in R
