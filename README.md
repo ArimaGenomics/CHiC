@@ -54,6 +54,7 @@ tar -xzf v0.8.0.tar.gz
 ### Installing CHiCAGO
 
 Refer to the documentation at: https://bioconductor.org/packages/release/bioc/html/Chicago.html for help installing CHiCAGO and its dependencies.
+#### *IMPORTANT NOTE: bedtools v2.26 or later isn't compatible with CHiCAGO! Please use v2.25 instead!!!*
 
 ```
 # in R
@@ -116,6 +117,8 @@ export PATH=/where/to/install/bin:$PATH
 ```
 
 - bedtools (v2.25), https://github.com/arq5x/bedtools2/releases/tag/v2.25.0
+
+  ***IMPORTANT NOTE: bedtools v2.26 or later isn't compatible with CHiCAGO! Please use v2.25 instead!!!***
 
 ```
 wget https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.0.tar.gz

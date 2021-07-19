@@ -7,7 +7,7 @@
 # Computing Resources: For shallow sequencing (5 - 20 million raw paired-end reads), the Arima Capture HiC pipeline (Arima-CHiC) requires 12 CPU cores with 48 GB RAM. The shallow sequencing analysis should complete in less than 2 hrs. For deep sequencing (200 – 600 million raw paired-end reads), we recommend 20 - 30 CPU cores with at least 80 - 120 GB RAM.  Samples with 200 million raw paired-end reads will run in about 48 hours with the recommended computational resources. Additional resources can be added to decrease the analysis time.
 
 # Please install the following dependencies and add them to your PATH variable to ensure HiCUP and CHiCAGO will execute in your computing environment:
-# IMPORTANT NOTE: bedtools v2.26 isn't compatible with CHiCAGO! Please use v2.25 instead!!!
+# IMPORTANT NOTE: bedtools v2.26 or later isn't compatible with CHiCAGO! Please use v2.25 instead!!!
 
 # Dependencies:
 # R 3.4.3 packages: argparse (v2.0.1)
