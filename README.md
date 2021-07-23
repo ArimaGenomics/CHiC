@@ -125,7 +125,6 @@ wget https://github.com/arq5x/bedtools2/releases/download/v2.25.0/bedtools-2.25.
 tar -xzf bedtools-2.25.0.tar.gz
 mv bedtools2 bedtools-2.25.0
 cd bedtools-2.25.0
-./configure --prefix=/where/to/install
 make
 make install
 export PATH=/where/to/install/bin:$PATH

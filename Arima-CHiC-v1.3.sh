@@ -212,6 +212,13 @@ if [[ $? -ne 0 ]]; then
     printHelpAndExit 1
 fi
 
+#hash deeptools &> /dev/null
+command -v deeptools &> /dev/null
+if [[ $? -ne 0 ]]; then
+    echo "Could not find deeptools. Please install or include it into the \"PATH\" variable!"
+    printHelpAndExit 1
+fi
+
 if ! [[ "$run_hicup" == "0" || "$run_hicup" == "1" ]]; then
     echo "The argument \"run_hicup\" must be either 0 or 1 (-W)!"
     printHelpAndExit 1
