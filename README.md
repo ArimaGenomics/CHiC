@@ -197,12 +197,17 @@ Contents: This file includes QC metrics for assessing the deep sequencing data f
 - The number of loops called
 - The percentage of long-range cis interactions that overlap the probe regions
 
+### Loops
+
+#### [output_directory]/chicago/data/[output_prefix].cis_le_2Mb.bedpe
+- Significant loops called by CHiCAGO
+
 ### Arima Arc Plots
 
-#### [output_directory]/chicago/data/[output_prefix].arcplot.gz
+#### [output_directory]/chicago/data/[output_prefix].cis_le_2Mb.arcplot.gz
 - bgzipped arcplot file
 
-#### [output_directory]/chicago/data/[output_prefix].arcplot.gz.tbi
+#### [output_directory]/chicago/data/[output_prefix].cis_le_2Mb.arcplot.gz.tbi
 - tabix index of the bgzipped arcplot file
 
 These files can be viewed in the WashU EpiGenome Browser (http://epigenomegateway.wustl.edu/browser/). See the Arima-CHiC Analysis User Guide for more details.
@@ -212,8 +217,8 @@ These files can be viewed in the WashU EpiGenome Browser (http://epigenomegatewa
 #### [output_directory]/chicago/data/[output_prefix].bigwig
 - bigwig file of all mapped reads. This file can be used to view the sequencing coverage in a genome browser.
 
-#### [output_directory]/chicago/data/[output_prefix].metaplot.pdf
-- PDF of metaplot of all mapped reads overlapping the probe regions used for loop calling. This file can be used to assess the signal to noise of the CHiC enrichment.
+#### [output_directory]/chicago/data/[output_prefix].heatmap.pdf
+- PDF of metaplot and heatmap of all mapped reads overlapping the probe regions used for loop calling. This file can be used to assess the signal to noise of the CHiC enrichment.
 
 
 ## Test Dataset (hg38)
