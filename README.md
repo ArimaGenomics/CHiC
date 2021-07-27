@@ -227,12 +227,9 @@ These files can be viewed in the WashU EpiGenome Browser (http://epigenomegatewa
 
 ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/test_data/
 
-On the FTP, there are 4 pre-computed design files for hg38, hg19, mm10, and mm9. For each genome build, there are three folders named: 1kb, 3kb and 5kb, which correspond to 1kb, 3kb and 5kb resolutions respectively. We found that after the binning, 5kb resolution provides the best replicate reproducibility and sensitivity. For each resolution, there are 7 files: three pre-computed design files (*.npb, *.poe and *.nbpb), one *.rmap, one *.baitmap, one *.baitmap_4col.txt and one CHiCAGO setting file.
+On the FTP (ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/), there are 4 pre-computed design folders: hg38, hg19, mm10, and mm9. For each genome build, there are three folders named: 1kb, 3kb and 5kb, which correspond to 1kb, 3kb and 5kb resolutions respectively. We found that after the binning, 5kb resolution provides the best replicate reproducibility and sensitivity. For each resolution, there are 7 files: three pre-computed design files (*.npb, *.poe and *.nbpb), one *.rmap, one *.baitmap, one *.baitmap_4col.txt and one CHiCAGO setting file.
 
 It also contains a reference folder, with one reference FASTA file (*.fa), one HiCUP digest file for Arima's dual-enzyme chemistry and six bowtie2 index files (*.bt2) in it.
-
-ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/
-
 
 ## Arima Pipeline Version
 
