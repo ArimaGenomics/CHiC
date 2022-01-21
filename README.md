@@ -1,4 +1,4 @@
-![alt text](https://arimagenomics.com/public/images/header-logo.png "Celebrating Science and Scientist")
+![alt text](https://arimagenomics.com/wp-content/files/2021/08/Arima-Genomics-logo.png "Celebrating Science and Scientist")
 
 # Arima Capture HiC Pipeline using Arima-HiC<sup>+</sup> Kit
 
