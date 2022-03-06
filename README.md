@@ -16,7 +16,7 @@ To order Arima-HiC<sup>+</sup> kits, please visit our website: https://arimageno
 git clone https://github.com/ArimaGenomics/CHiC.git
 cd CHiC
 tar xf chicagoTools.tar.gz
-chmod 755 Arima-CHiC-v1.3.sh
+chmod 755 Arima-CHiC-v1.4.sh
 ```
 
 ### Installing Python 3.4 or later
@@ -149,7 +149,7 @@ conda install -c bioconda deeptools
 ```
 
 ## Usage (Command line options)
-Arima-CHiC-v1.3.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_plot]
+Arima-CHiC-v1.4.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_plot]
               [-A bowtie2] [-X bowtie2_index_basename] [-d digest] [-H hicup_dir] [-C chicago_dir]
               [-I FASTQ_string] [-o out_dir] [-p output_prefix] [-b BED] [-R RMAP] [-B BAITMAP]
               [-D design_dir] [-O organism] [-r resolution] [-t threads] [-v] [-h]
@@ -233,7 +233,7 @@ It also contains a reference folder, with one reference FASTA file (*.fa), one H
 
 ## Arima Pipeline Version
 
-1.3
+1.4
 
 ## Support
 
