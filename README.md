@@ -46,7 +46,7 @@ install.packages("argparser")
 
 ```
 # in R
-install.packages("argparser")
+install.packages("argparse")
 ```
 
 ### Installing HiCUP
