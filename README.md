@@ -42,6 +42,13 @@ conda install R
 install.packages("argparser")
 ```
 
+- argparse (2.1.5), https://cran.r-project.org/web/packages/argparse/index.html
+
+```
+# in R
+install.packages("argparser")
+```
+
 ### Installing HiCUP
 
 Refer to the documentation at: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html for help installing HiCUP and its dependencies (Perl, R, bowtie2, and samtools).
