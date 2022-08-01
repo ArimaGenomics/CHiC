@@ -174,7 +174,7 @@ Arima-CHiC-v1.4.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_
       * [-I FASTQ_string]: a pair of FASTQ files separated by "," (no space is allowed)
       * [-o out_dir]: output directory
       * [-p output_prefix]: output file prefix (filename only, not including the path)
-      * [-b BED]: the Arima capture probes design BED file for CHiCAGO
+      * [-b BED]: the Arima capture probes design BED file for CHiCAGO (in utils folder)
       * [-R RMAP]: CHiCAGO's *.rmap file
       * [-B BAITMAP]: CHiCAGO's *.baitmap file
       * [-D design_dir]: directory containing CHiCAGO's design files
