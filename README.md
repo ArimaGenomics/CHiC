@@ -2,7 +2,7 @@
 
 # Arima Capture HiC Pipeline using Arima-HiC<sup>+</sup> Kit
 
-This pipeline is for analyzing capture HiC data with HiCUP and CHiCAGO pipelines for generating Arima Genomics QC metrics and output data files. The pipeline runs the normal HiCUP and CHiCAGO algorithms from https://www.bioinformatics.babraham.ac.uk/projects/hicup/ and https://bioconductor.org/packages/release/bioc/html/Chicago.html with some minor changes to the default parameters. These parameters have been optimized by internal benchmarking and have been found to optimize sensitivity and specificity. This pipeline will also generate shallow and deep sequencing QC metrics which can be copied into the Arima QC Worksheet for analysis. Additionally, the pipeline automatically generates metaplots for data QC and arc plots of chromatin loops for data visualization.
+This pipeline is for analyzing capture HiC data with HiCUP and CHiCAGO pipelines for generating Arima Genomics QC metrics and output data files. The pipeline runs the standard HiCUP and CHiCAGO algorithms from https://www.bioinformatics.babraham.ac.uk/projects/hicup/ and https://bioconductor.org/packages/release/bioc/html/Chicago.html with some minor changes to the default parameters. These parameters have been optimized by internal benchmarking and have been found to optimize sensitivity and specificity. This pipeline will also generate shallow and deep sequencing QC metrics which can be copied into the Arima QC Worksheet for analysis. Additionally, the pipeline automatically generates metaplots for data QC and arc plots of chromatin loops for data visualization.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ To order Arima-HiC<sup>+</sup> kits, please visit our website: https://arimageno
 git clone https://github.com/ArimaGenomics/CHiC.git
 cd CHiC
 tar xf chicagoTools.tar.gz
-chmod 755 Arima-CHiC-v1.4.sh
+chmod 755 Arima-CHiC-v1.5.sh
 ```
 
 ### Installing Python 3.4 or later
@@ -40,13 +40,6 @@ conda install R
 ```
 # in R
 install.packages("argparser")
-```
-
-- argparse (2.1.5), https://cran.r-project.org/web/packages/argparse/index.html
-
-```
-# in R
-install.packages("argparse")
 ```
 
 ### Installing HiCUP
@@ -156,7 +149,7 @@ conda install -c bioconda deeptools
 ```
 
 ## Usage (Command line options)
-Arima-CHiC-v1.4.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_plot]
+Arima-CHiC-v1.5.sh [-W run_hicup] [-Y run_bam2chicago] [-Z run_chicago] [-P run_plot]
               [-A bowtie2] [-X bowtie2_index_basename] [-d digest] [-H hicup_dir] [-C chicago_dir]
               [-I FASTQ_string] [-o out_dir] [-p output_prefix] [-b BED] [-R RMAP] [-B BAITMAP]
               [-D design_dir] [-O organism] [-r resolution] [-t threads] [-v] [-h]
@@ -234,13 +227,54 @@ These files can be viewed in the WashU EpiGenome Browser (http://epigenomegatewa
 
 ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/test_data/
 
-On the FTP (ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/), there are 4 pre-computed design folders: hg38, hg19, mm10, and mm9. For each genome build, there are three folders named: 1kb, 3kb and 5kb, which correspond to 1kb, 3kb and 5kb resolutions respectively. We found that after the binning, 5kb resolution provides the best replicate reproducibility and sensitivity. For each resolution, there are 7 files: three pre-computed design files (*.npb, *.poe and *.nbpb), one *.rmap, one *.baitmap, one *.baitmap_4col.txt and one CHiCAGO setting file.
+On the FTP ( ftp://ftp-arimagenomics.sdsc.edu/pub/ARIMA_Capture_HiC_Settings/ ), there are 4 pre-computed design folders: hg38, hg19, mm10, and mm9. For each genome build, there are three folders named: 1kb, 3kb and 5kb, which correspond to 1kb, 3kb and 5kb resolutions respectively. We found that after the binning, 5kb resolution provides the best replicate reproducibility and sensitivity. For each resolution, there are 7 files: three pre-computed design files (*.npb, *.poe and *.nbpb), one *.rmap, one *.baitmap, one *.baitmap_4col.txt and one CHiCAGO setting file.
 
-It also contains a reference folder, with one reference FASTA file (*.fa), one HiCUP digest file for Arima's dual-enzyme chemistry and six bowtie2 index files (*.bt2) in it.
+It also contains a reference folder, with one reference FASTA file (\*.fa), one HiCUP digest file for Arima's dual-enzyme chemistry and six bowtie2 index files (\*.bt2) in it.
+
+**Here is a detailed description of each file on our FTP.**
+
+*hg38.fa*
+- This is the genome reference file downloaded from UCSC table browser.
+
+*Digest_hg38_Arima.txt*
+- This is the HiCUP digest file for Arima's dual-enzyme chemistry, generated using the "hicup_digester" script from HiCUP pipeline.
+- Reference: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html#arima-protocol
+
+*hg38.1.bt2, hg38.2.bt2, hg38.3.bt2, hg38.4.bt2, hg38.rev.1.bt2, hg38.rev.2.bt2*
+- These six files are are bowtie2 index files, generated using "bowtie2-build" script from Bowtie 2 pipeline.
+- Reference: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml#the-bowtie2-build-indexer
+
+*hg38_chicago_input_5kb.rmap*
+- This is a tab-separated file of the format <chr> <start> <end> <numeric ID>, describing the restriction digest (or "virtual digest" if pooled fragments are used). These numeric IDs are referred to as "otherEndID" in CHiCAGO. All read fragments mapping outside of the digest coordinates will be disregarded.
+- The file can be created using "create_baitmap_rmap.pl" script from CHiCAGO pipeline (with some pre-processing using custom scripts).
+- Reference: https://bitbucket.org/chicagoTeam/chicago/src/master/chicagoTools/
+
+*hg38_chicago_input_5kb.baitmap*
+- This is a tab-separated file of the format <chr> <start> <end> <numeric ID> <annotation>, listing the coordinates of the baited/captured restriction fragments (should be a subset of the fragments listed in *.rmap file), their numeric IDs (should match those listed in *.rmap file for the corresponding fragments) and their annotations (such as, for example, the names of baited promoters). The numeric IDs are referred to as "baitID" in CHiCAGO.
+- The file can be created using "create_baitmap_rmap.pl" script from CHiCAGO pipeline (with some pre-processing using custom scripts).
+- Reference: https://bitbucket.org/chicagoTeam/chicago/src/master/chicagoTools/
+
+*hg38_chicago_input_5kb.baitmap_4col.txt*
+- This is the first 4 columns of the "hg38_chicago_input_5kb.baitmap" file.
+
+*GW_PCHIC_hg38_5kb.nbpb, GW_PCHIC_hg38_5kb.npb, GW_PCHIC_hg38_5kb.poe*
+- These three files are called design files in CHiCAGO pipeline. They are ASCII files containing the following information:
+- NPerBin file (.npb): <baitID> <Total no. valid restriction fragments in distance bin 1> ... <Total no. valid restriction fragments in distance bin N>, where the bins map within the "proximal" distance range from each bait (0; maxLBrownEst] and bin size is defined by the binsize parameter.
+- NBaitsPerBin file (.nbpb): <otherEndID> <Total no. valid baits in distance bin 1> ... <Total no. valid baits in distance bin N>, where the bins map within the "proximal" distance range from each other end (0; maxLBrownEst] and bin size is defined by the binsize parameter.
+- Proximal Other End (ProxOE) file (.poe): <baitID> <otherEndID> <absolute distance> for all combinations of baits and other ends that map within the "proximal" distance range from each other (0; maxLBrownEst].
+- These three files can be created using "makeDesignFiles_py3.py" script from CHiCAGO pipeline (with *rmap and *.baitmap as the input).
+- Reference: https://bitbucket.org/chicagoTeam/chicago/src/master/chicagoTools/
+
+*hicup.conf*
+- This is the configuration file for HiCUP pipeline. Detailed descriptions on how to tune those parameters can be found at: https://www.bioinformatics.babraham.ac.uk/projects/hicup/read_the_docs/html/index.html#running-hicup
+
+*chicago_settings_5kb.txt*
+- This is the settings file for CHiCAGO pipeline. Detailed descriptions on how to tune those parameters can be found at: https://rdrr.io/bioc/Chicago/man/defaultSettings.html
+
 
 ## Arima Pipeline Version
 
-1.4
+1.5
 
 ## Support
 
@@ -253,4 +287,4 @@ For Arima customer support, please contact techsupport@arimagenomics.com
 
 #### Authors of CHiCAGO: https://bioconductor.org/packages/release/bioc/html/Chicago.html
 
-- Cairns J, Freire-Pritchett P, Wingett SW, Dimond A, Plagnol V, Zerbino D, Schoenfelder S, Javierre B, Osborne C, Fraser P, Spivakov M (2016). “CHiCAGO: Robust Detection of DNA Looping Interactions in Capture Hi-C data.” Genome Biology, 17, 127. R package version 4.1.0.
+- Cairns J, Freire-Pritchett P, Wingett SW, Dimond A, Plagnol V, Zerbino D, Schoenfelder S, Javierre B, Osborne C, Fraser P, Spivakov M (2016). “CHiCAGO: Robust Detection of DNA Looping Interactions in Capture Hi-C data.” Genome Biology, 17, 127.
